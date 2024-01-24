@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  static-webapp:
+    image: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ./dist/apps/webapp/.next:/usr/share/nginx/html
