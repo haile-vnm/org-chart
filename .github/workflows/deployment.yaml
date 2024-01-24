@@ -1,0 +1,32 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Deployment-S3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm install
+
+      - run: npx nx build webapp
+
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          SOURCE_DIR: ./dist/apps/webapp/.next
+          AWS_S3_BUCKET: hlt-orgchart
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-southeast-2
