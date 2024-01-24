@@ -8,7 +8,7 @@ interface Employee {
   job: string;
 }
 
-function CustomNode({ data }: { data: Employee }) {
+function EmployeeNode({ data }: { data: Employee }) {
   return (
     <div className="px-4 py-2 shadow-md rounded-md bg-white border-2 border-stone-400">
       <div className="flex">
@@ -27,4 +27,4 @@ function CustomNode({ data }: { data: Employee }) {
   );
 }
 
-export default memo(CustomNode);
+export default memo(EmployeeNode);
