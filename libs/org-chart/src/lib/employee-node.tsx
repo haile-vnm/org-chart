@@ -21,6 +21,7 @@ function EmployeeNode({ data }: { data: Employee }) {
         </div>
       </div>
 
+
       <Handle type="target" position={Position.Top} className="w-0 !bg-teal-500 rounded" />
       <Handle type="source" position={Position.Bottom} className="w-0 !bg-teal-500 rounded" />
     </div>

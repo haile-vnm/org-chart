@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Connection } from 'reactflow';
 
 import 'reactflow/dist/base.css';
@@ -101,7 +101,24 @@ export const OrgChart = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initEdges);
 
   const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), []);
+  const randomNodes = () => {
+    console.log('prenode', nodes);
 
+    const newNodes = nodes.map(node =>
+      Object.assign(
+        node,
+        { position: { y: node.position.y, x: node.position.x + (Math.floor(Math.random() * 3) % 3 - 1) *100 }}
+      )
+    )
+    console.log(newNodes);
+    _setNodes(newNodes)
+
+    return newNodes;
+  }
+  useEffect(() => {
+    setInterval(() => randomNodes(), 2000)
+
+  }, [])
   return (
     <ReactFlow
       nodes={nodes}
