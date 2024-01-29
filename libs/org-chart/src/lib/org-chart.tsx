@@ -104,10 +104,10 @@ export const OrgChart = () => {
   const randomNodes = () => {
     console.log('prenode', nodes);
 
-    const newNodes = nodes.map(node =>
-      Object.assign(
+    const newNodes = nodes.map((node, i) =>
+      (!i || (Math.floor(Math.random() * 10)%2)) ? node : Object.assign(
         node,
-        { position: { y: node.position.y, x: node.position.x + (Math.floor(Math.random() * 3) % 3 - 1) *100 }}
+        { position: { y: node.position.y, x: node.position.x + 40 }}
       )
     )
     console.log(newNodes);
