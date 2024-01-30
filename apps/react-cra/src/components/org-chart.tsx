@@ -98,7 +98,7 @@ export const OrgChartComponent = (props, ref) => {
 
           if (!element) return null;
 
-          return createPortal(<NodeContent data={d} onClick={cb} />, element);
+          return createPortal(<NodeContent node={d} onClick={cb} />, element);
         })}
     </div>
   );
