@@ -13,6 +13,10 @@ export default async function Index() {
     { id: 1, parentId: null, name: 'node1' },
     { id: 2, parentId: 1, name: 'node2' },
     { id: 3, parentId: 1, name: 'node3' },
+    { id: 4, parentId: 1, name: 'node3' },
+    { id: 5, parentId: 4, name: 'node3' },
+    { id: 6, parentId: 5, name: 'node3' },
+    { id: 7, parentId: 5, name: 'node3' },
   ];
   return (
     <div className={styles.page}>
