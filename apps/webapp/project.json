@@ -23,6 +23,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "webapp:build",
+        "port": 4300,
         "dev": true
       },
       "configurations": {
