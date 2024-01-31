@@ -1,7 +1,6 @@
 'use client';
 import { OrgChartComponent } from '../components/org-chart';
 import styles from './page.module.scss';
-import { OrgChart } from '@orgchart/org-chart';
 
 export default async function Index() {
   /*
@@ -20,7 +19,6 @@ export default async function Index() {
   ];
   return (
     <div className={styles.page}>
-      {/* <OrgChart></OrgChart> */}
       <OrgChartComponent
         data={data}
         onNodeClick={(node) => console.log(node.id)}

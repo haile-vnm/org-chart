@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useLayoutEffect, useRef } from 'react';
 import { OrgChart } from 'd3-org-chart';
+import { createRoot } from 'react-dom/client';
+import { NodeContent } from './node-content';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const OrgChartComponent = (props: { setClick: (node: any) => void; onNodeClick: (node: any) => void; data: any}) => {
   const d3Container = useRef(null);
-  let chart: any = null;
+  let chart: OrgChart<{id: string}>;
 
   function addNode(node: any) {
     chart.addNode(node);
@@ -23,21 +25,17 @@ export const OrgChartComponent = (props: { setClick: (node: any) => void; onNode
         .container(d3Container.current)
         .data(props.data)
         .nodeWidth(() => 400)
-        .nodeHeight(() => 120)
-        .nodeContent((n: any) => {
-          return `<div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title">
-              Shoes!
-              <div class="badge badge-secondary">NEW</div>
-            </h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="card-actions justify-end">
-              <div class="badge badge-outline">Fashion</div>
-              <div class="badge badge-outline">Products</div>
-            </div>
-          </div>
-        </div>`
+        .nodeHeight(() => 170)
+        .nodeContent(n => {
+          return `<div id="${n.id}"></div>`
+        })
+        .nodeUpdate(n => {
+          const nodeElement = document.getElementById(n.id!);
+          if (!nodeElement) {
+            return null;
+          }
+
+          return createRoot(nodeElement).render(<NodeContent node={n}></NodeContent>)
         })
         .onNodeClick((...args: any) => {
           console.log(args, 'Id of clicked node ');
